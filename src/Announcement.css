@@ -1,0 +1,35 @@
+.announcement {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .announcement img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .announcement-info {
+    text-align: left;
+  }
+  
+  .announcement-info h2 {
+    margin: 0;
+  }
+  
+  .announcement-info h4 {
+    margin: 5px 0;
+  }
+  
+  .announcement-info p {
+    margin: 10px 0 0;
+  }
+  
+  
