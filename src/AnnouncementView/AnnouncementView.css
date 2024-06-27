@@ -1,0 +1,14 @@
+.announcement {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center-align children */
+  justify-content: flex-start; /* Align items to the start of the container */
+  background-color: #fff;
+  color: #484848;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  height: auto; /* Adjust height to auto to accommodate content */
+  max-width: auto; 
+  margin: auto; /* Center the announcement in its parent container */
+}

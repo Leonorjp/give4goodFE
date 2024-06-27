@@ -1,0 +1,15 @@
+.card-button {
+    background-color: #C01722;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .card-button:hover {
+    background-color: #a32020;
+  }
+  

@@ -1,0 +1,96 @@
+.card {
+    background-color: white;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 30px 30px  rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  
+.card-content {
+    display: flex;
+    align-items: flex-start;
+}
+  
+.card-header {
+    align-content: center;
+  }
+  
+  .card-image {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-image img {
+    width: 100%;
+    border-radius: 40px;
+  }
+  
+  .carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    width: 100%;
+  }
+
+.card-navigation {
+    display: flex; /* Displays the navigation arrows in a row */
+    align-items: center; /* Aligns items vertically in the center */
+    color: #7E7E7E;   
+    margin-top: 100%; 
+    cursor: pointer;
+} 
+
+.card-navigation :hover {
+    color: #686868;
+}
+  
+  .card-text {
+    width: 100%;
+    margin-left: 50px;
+    margin-right: 20px;
+  }
+
+.text-and-button {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-end; /* Align items to the start (left) */
+}
+
+.text-container {
+    width: 100%; /* Ensure the text container takes full width */
+}
+
+/* Add a class for the button if needed, or adjust its container */
+.button-container {
+    align-self: flex-end; /* Align the button to the end (right) of the container */
+    margin-top: 20px; /* Add some space between the text and the button */
+}
+  
+  .card-title {
+    font-size: 24px;
+    color: #C01722;
+  }
+  
+  .card-category {
+    font-size: 18px;
+    color: #CB5C63;
+  }
+  
+  .card-description {
+    font-size: 16px;
+    color: #555;
+    
+  }
