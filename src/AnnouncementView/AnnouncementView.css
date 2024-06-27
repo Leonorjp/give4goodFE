@@ -12,3 +12,22 @@
   max-width: auto; 
   margin: auto; /* Center the announcement in its parent container */
 }
+
+
+.create-button-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.create-button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #A31218;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
