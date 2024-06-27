@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './CreateAd.css';
+import './EditAd.css';
 
-const CreateAd = () => {
+const EditAd = () => {
   const [imagePreview, setImagePreview] = useState(null);
 
   const handleImageChange = (e) => {
@@ -31,18 +31,18 @@ const CreateAd = () => {
               <div className="image-placeholder">Choose an image</div>
             )}
           </div>
-          <div className="input-container">         /*information when creating the ad */                     
+          <div className="input-container">
             <input type="text" className="text-input" placeholder="Name" />
-            <input
-              className="text-input-description-input"
-              placeholder="Description"
-            />
+            <input className="text-input-description-input" placeholder="Description"/>
             <select className="text-input-category">
               <option>Select Category</option>
             </select>
           </div>
-          <div className="create-button-container">
-            <button className="create-button">Create</button>
+          <div className="Edit-button-container">
+            <button className="Edit-button">Edit</button>
+          </div>
+          <div className="Delete-button-container">
+            <button className="Delete-button">Delete</button>
           </div>
         </div>
       </div>
@@ -50,4 +50,4 @@ const CreateAd = () => {
   );
 };
 
-export default CreateAd;
+export default EditAd;

@@ -125,26 +125,48 @@ header {
   outline: none;
 }
 
-  .create-button-container {
+.Delete-button-container,
+.Edit-button-container {
     position: absolute;
     bottom: 20px;
-    right: 20px;
-    display: flex;
+    display: flex; 
     justify-content: flex-end;
   }
 
-  .create-button {
+  .Delete-button-container{
+    right: 20px;
+  }
+
+  .Edit-button-container{
+    right: 150px;
+  }
+
+.Delete-button,
+.Edit-button {
+  width: 100px;
     padding: 8px 16px;
     border: none;
-    background-color: #A31218;
     color: white;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-  }
+}
 
-.create-button:hover {
+.Delete-button{
+  background-color: #a31218;
+}
+
+.Edit-button{
+  background-color: #B1B1B1;
+}
+
+.Delete-button:hover{
   background-color: #C01722;
+  transform: scale(1.1);
+}
+
+.Edit-button:hover {
+  background-color: #D3D3D3;
   transform: scale(1.1);
 }

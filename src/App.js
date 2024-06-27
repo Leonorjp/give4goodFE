@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css'; // Importa o arquivo de estilos do aplicativo
 import Announcement from './AnnouncementList/Announcement';
 import CreateAd from './AnnouncementCreat/Edit/CreateAd.js';
+import EditAd from './AnnouncementCreat/Edit/EditAd.js';
 
 function App() {
   const [bodyClass, setBodyClass] = useState('');
@@ -49,7 +50,7 @@ function App() {
         <main className={`main-content ${bodyClass}`}>
           <Routes>
             <Route path="/" element={<h1>Home Page</h1>} />
-            <Route path="/about" element={<h1>About Us</h1>} />
+            <Route path="/about" element={<EditAd />} />
             <Route path="/announcement" element={<Announcement />} />
             <Route path="/account" element={<CreateAd />} />
           </Routes>
