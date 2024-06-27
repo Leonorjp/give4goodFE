@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  background-color: #ffffff;
 }
 
 .announcement-card {
@@ -104,3 +105,4 @@
   color: #c51d23; 
   margin-bottom: 20px; 
 }
+
