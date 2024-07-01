@@ -1,4 +1,3 @@
-// src/components/Header.js
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Button, Menu, MenuItem } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -128,8 +127,8 @@ const Header = () => {
           </StyledMenu>
           <HeaderLink
             component={Link}
-            to="/account"
-            active={location.pathname === '/account'}
+            to="/sign-up"
+            active={location.pathname === '/sign-up'}
           >
             {capitalizeFirstLetter('account')}
           </HeaderLink>

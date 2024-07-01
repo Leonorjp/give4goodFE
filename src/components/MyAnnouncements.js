@@ -197,8 +197,8 @@ const AnnouncementCard = ({ title, category }) => (
 
 const MyAnnouncements = () => {
   const announcements = [
-     { id: 1, title: 'Cão peludo', category: 'Animal' },
-     { id: 2, title: 'Cão brincalhão', category: 'Animal' },
+   //  { id: 1, title: 'Cão peludo', category: 'Animal' },
+   //  { id: 2, title: 'Cão brincalhão', category: 'Animal' },
      
   ];
 
