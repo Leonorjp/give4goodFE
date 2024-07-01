@@ -1,0 +1,114 @@
+.card {
+  background-color: white;
+  width: 90%;
+  max-width: 90%;
+  max-height: 80%;
+  height: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 30px 30px  rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-left: 5%;
+  }
+  
+  
+.card-content {
+  display: flex;
+  align-items: flex-start;
+}
+  
+.card-header {
+  align-content: center;
+}
+  
+.card-image {
+  width: 100%;
+  max-width: 300px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.card-image img {
+  width: 100%;
+  border-radius: 40px;
+}
+  
+.carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-navigation {
+  display: flex;
+  align-items: center;
+  color: #7E7E7E;   
+  margin-top: 60%; 
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 20px;
+} 
+
+.backArrow :hover {
+  color: #686868;
+}
+  
+.card-text {
+  width: 100%;
+  margin-left: 50px;
+  margin-right: 20px;
+}
+
+  .card-text h1 {
+    font-size: 30px; 
+  }
+  
+  .card-text h2 {
+    font-size: 22px;
+  }
+  
+  .card-text p {
+    font-size: 18px; 
+  }
+
+.text-and-button {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-end; 
+}
+
+.text-container {
+    width: 100%;
+}
+
+
+.button-container {
+    align-self: flex-end; 
+    margin-top: 100px; 
+}
+  
+  .card-title {
+    font-size: 24px;
+    color: #C01722;
+  }
+  
+  .card-category {
+    font-size: 18px;
+    color: #CB5C63;
+  }
+  
+  .card-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 2;
+    padding: 70px, 70px, 70px, 70px;
+    
+  }
