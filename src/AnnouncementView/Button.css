@@ -1,14 +1,12 @@
-.CustomButton {
-  background-color: #C01722;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
+.claim-button{
+  background-color: #C01722 !important;
+  color: white ;
+  font-Weight: bold !important;
+  font-Size: 14px !important;
   border: none;
-  padding: 10px 30px;
-  border-radius: 5px;
+  padding: 8px 30px;
+  border-Radius: 5px;
   cursor: pointer;
   display: flex;
-  justify-content: flex-end;
-  margin-top: 12%;
-
+  justify-Content: flex-end !important;
 }
