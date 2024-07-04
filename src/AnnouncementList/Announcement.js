@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AnnouncementCard from './AnnouncementCard';
 import './Announcement.css';
 
-function Announcements({ announcements, error }) {
+function Announcements() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [announcements, setAnnouncements] = useState([]);
+  const [error, setError] = useState(null);
+  const [fetched, setFetched] = useState(false);
   const announcementsPerPage = 9;
+  
+  const URL = `http://localhost:8080/announcements/not-owned-by/${sessionStorage.getItem("userId")}`;
+
+  useEffect(() => {
+    try {
+      const response = fetch(URL);
+      const data = response.json();
+      setAnnouncements(data); 
+      setFetched(true); // Atualize o estado para indicar que os anúncios foram buscados
+    } catch (error) {
+      setError(error.message);
+    }
+  })
 
   const handleNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
