@@ -16,12 +16,13 @@
   overflow: hidden;
   margin: 10px;
   text-align: center;
-  box-shadow: 0 4px 35px rgba(112, 111, 111, 0.8); /* Sombra ao redor do card */
+  box-shadow: 0 4px 35px rgba(112, 111, 111, 0.8); 
+  
 }
 
 .announcement-card img {
   width: 80%; /* Ajuste do tamanho da imagem */
-  height: 50%;
+  height: 300px;
   margin-top: 16px;
   border-radius: 10%;
 }
