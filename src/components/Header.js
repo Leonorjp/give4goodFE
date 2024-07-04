@@ -11,6 +11,7 @@ const capitalizeFirstLetter = (string) => {
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [accountAnchorEl, setAccountAnchorEl] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -18,8 +19,13 @@ const Header = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleAccountClick = (event) => {
+    setAccountAnchorEl(event.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
+    setAccountAnchorEl(null);
   };
 
   const handleLogoClick = () => {
@@ -81,12 +87,29 @@ const Header = () => {
             </MenuItem>
           </Menu>
           <Button
-            component={Link}
-            to="/sign-up"
-            className={`header-link ${location.pathname === '/sign-up' ? 'header-link-active' : ''}`}
+            aria-controls="account-menu"
+            aria-haspopup="true"
+            onClick={handleAccountClick}
+            endIcon={<ArrowDropDownIcon />}
+            className={`header-link ${location.pathname === '/account' ? 'header-link-active' : ''}`}
           >
             {capitalizeFirstLetter('account')}
           </Button>
+          <Menu
+            id="account-menu"
+            anchorEl={accountAnchorEl}
+            keepMounted
+            open={Boolean(accountAnchorEl)}
+            onClose={handleClose}
+            className="styled-menu"
+          >
+            <MenuItem component={Link} to="/announcementLogin" onClick={handleClose} className="styled-menu-item">
+              {capitalizeFirstLetter('sign in')}
+            </MenuItem>
+            <MenuItem component={Link} to="/sign-up" onClick={handleClose} className="styled-menu-item">
+              {capitalizeFirstLetter('sign up')}
+            </MenuItem>
+          </Menu>
         </div>
       </Toolbar>
     </AppBar>

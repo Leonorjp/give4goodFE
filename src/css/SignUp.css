@@ -1,28 +1,27 @@
-/* SignUp.css */
 .page-container {
-  background-color: #c51d23;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  padding: 20px;
   animation: fadeIn 0.5s ease-out;
 }
 
 .form-container {
   background-color: white;
   border-radius: 30px;
-  padding: 80px;
+  padding: 40px;
   width: 100%;
   max-width: 1500px;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-  border: 40px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   animation: slideIn 0.5s ease-out;
 }
 
 .title {
   color: #c51d23;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   font-size: 42px;
   text-align: center;
   font-weight: bold;

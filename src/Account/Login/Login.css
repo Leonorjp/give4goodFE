@@ -4,6 +4,9 @@
   overflow: hidden;
   box-shadow: 0 10px 50px 20px rgba(0, 0, 0, 0.2);
   max-width: 80vw;
+  margin: 0 auto; /* Center the container horizontally */
+  height: 80vh; /* Ensure the container has a height */
+  margin-top: 50px;
 }
 
 .login-form {

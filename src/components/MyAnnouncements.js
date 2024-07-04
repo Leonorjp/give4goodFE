@@ -201,8 +201,7 @@ const MyAnnouncements = () => {
   useEffect(() => {
     const fetchAnnouncements = async () => {
       try {
-        const donorId = '66869b0d10fbf7217951b147'; 
-        const response = await fetch(`http://localhost:8080/announcements/donor/${donorId}`);
+        const response = await fetch(`http://localhost:8080/announcements/donor/${sessionStorage.getItem('userId')}`);
         const data = await response.json();
         setAnnouncements(data);
       } catch (error) {

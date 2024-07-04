@@ -41,7 +41,7 @@ function Login() {
         allowEscapeKey: false,
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/account");
+          navigate("/");
         }
         return responseJson
       });

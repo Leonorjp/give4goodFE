@@ -72,7 +72,7 @@ const SignUp = () => {
       if (response.ok) {
         console.log('Success:', data);
         toast.success('Account created successfully!');
-        setTimeout(() => navigate('/login'), 2000); // Delay navigation to ensure toast is visible
+        setTimeout(() => navigate('/announcementLogin'), 2000); // Delay navigation to ensure toast is visible
       } else if (response.status === 409) {
         console.error('Error:', response.statusText, data);
         toast.error('Email already in use. Please use a different email.');
