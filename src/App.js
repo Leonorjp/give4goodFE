@@ -5,26 +5,24 @@ import Announcement from './AnnouncementList/Announcement';
 import CreateAd from './AnnouncementCreat/Edit/CreateAd';
 import EditAd from './AnnouncementCreat/Edit/EditAd';
 
-const URL = 'http://localhost:8080/announcements/';
+const URL = 'http://localhost:8080/announcements';
 
 function App() {
   const [bodyClass, setBodyClass] = useState('');
   const [announcements, setAnnouncements] = useState([]);
   const [error, setError] = useState(null);
+  const [fetched, setFetched] = useState(false);
 
   const fetchAnnouncements = async () => {
     try {
       const response = await fetch(URL);
       const data = await response.json();
       setAnnouncements(data); 
+      setFetched(true); // Atualize o estado para indicar que os anúncios foram buscados
     } catch (error) {
       setError(error.message);
     }
   };
-
-  useEffect(() => {
-    fetchAnnouncements();
-  });
 
   return (
     <Router>
@@ -40,17 +38,28 @@ function App() {
             </ul>
           </nav>
         </header>
-        <MainContent bodyClass={bodyClass} setBodyClass={setBodyClass} announcements={announcements} error={error} />
+        <MainContent 
+          bodyClass={bodyClass} 
+          setBodyClass={setBodyClass} 
+          announcements={announcements} 
+          error={error} 
+          fetchAnnouncements={fetchAnnouncements}
+          fetched={fetched}
+        />
       </div>
     </Router>
   );
 }
 
-const MainContent = ({ bodyClass, setBodyClass, announcements, error }) => {
+const MainContent = ({ bodyClass, setBodyClass, announcements, error, fetchAnnouncements, fetched }) => {
   const location = useLocation();
 
   useEffect(() => {
     const pathName = location.pathname;
+    if (pathName === '/announcement' && !fetched) {
+      fetchAnnouncements(); // Apenas buscar se ainda não foi buscado
+    }
+
     if (pathName === '/announcement') {
       setBodyClass('announcement-page');
     } else if (pathName === '/account') {
@@ -58,7 +67,7 @@ const MainContent = ({ bodyClass, setBodyClass, announcements, error }) => {
     } else {
       setBodyClass('default-page');
     }
-  }, [location.pathname, setBodyClass]);
+  }, [location.pathname, setBodyClass, fetchAnnouncements, fetched]);
 
   return (
     <main className={`main-content ${bodyClass}`}>
