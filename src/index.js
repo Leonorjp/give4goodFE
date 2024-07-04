@@ -3,20 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-// src/index.js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import { BrowserRouter } from 'react-router-dom';
 
-
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+// src/index.js
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -24,8 +18,7 @@ ReactDOM.render(
         <App />
       </BrowserRouter>
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
