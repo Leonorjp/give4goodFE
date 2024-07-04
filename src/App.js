@@ -1,3 +1,11 @@
+import React from 'react';
+import { CssBaseline } from '@mui/material';
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import HomePage from './components/HomePage';
+import AboutUs from './components/AboutUs';
+import MyAnnouncements from './components/MyAnnouncements';
+import SignUp from './components/SignUp';
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./App.css";
@@ -5,16 +13,6 @@ import Card from "./AnnouncementView/Card.js";
 import Login from "./Account/Login/Login.js";
 
 function App() {
-  const [index, setIndex] = useState(0);
-
-  const handlePrevious = () => {
-    setIndex((prevIndex) => (prevIndex === 0 ? announcements.length - 1 : prevIndex - 1));
-  };
-
-  const handleNext = () => {
-    setIndex((prevIndex) => (prevIndex === announcements.length - 1 ? 0 : prevIndex + 1));
-  };
-
   return (
     <Router>
       <div className="App">
@@ -55,6 +53,17 @@ function App() {
         </main>
       </div>
     </Router>
+    <>
+      <CssBaseline />
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/my-announcements" element={<MyAnnouncements />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        {/* Adicione outras rotas aqui */}
+      </Routes>
+    </>
   );
 }
 
