@@ -1,27 +1,8 @@
-import React, { useState } from 'react';
-import './App.css';
-import Announcement from './Announcement';
-
-const announcements = [
-  {
-    photo: 'https://via.placeholder.com/150',
-    name: 'Announcement 1',
-    category: 'Category 1',
-    description: 'Description of Announcement 1',
-  },
-  {
-    photo: 'https://via.placeholder.com/150',
-    name: 'Announcement 2',
-    category: 'Category 2',
-    description: 'Description of Announcement 2',
-  },
-  {
-    photo: 'https://via.placeholder.com/150',
-    name: 'Announcement 3',
-    category: 'Category 3',
-    description: 'Description of Announcement 3',
-  },
-];
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import "./App.css";
+import Card from "./AnnouncementView/Card.js";
+import Login from "./Account/Login/Login.js";
 
 function App() {
   const [index, setIndex] = useState(0);
@@ -35,15 +16,45 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Announcement announcement={announcements[index]} />
-        <div className="navigation">
-          <button onClick={handlePrevious}>&lt;</button>
-          <button onClick={handleNext}>&gt;</button>
-        </div>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <nav>
+            <div className="logo">Give4Good</div>
+            <ul className="nav-links">
+              <li>
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/announcementDetails" className="nav-link">
+                  Announcements Details
+                </Link>
+              </li>
+              <li className="active">
+                <Link to="/announcementLogin" className="nav-link">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/account" className="nav-link">
+                  Account
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<h1>Home Page</h1>} />
+            <Route path="/announcementDetails" element={<Card />} />
+            <Route path="/announcementLogin" element={<Login />} />
+            <Route path="/account" element={<h1>Account Page</h1>} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
