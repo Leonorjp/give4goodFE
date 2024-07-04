@@ -1,3 +1,5 @@
+.App {
+  background-color: #ffffff;
 /* src/index.css */
 
 body {
@@ -95,6 +97,14 @@ button:hover {
   margin-bottom: 20px;
 }
 
+body {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .hero-container button {
   margin-top: 20px;
 }
