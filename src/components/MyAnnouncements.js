@@ -199,7 +199,7 @@ const MyAnnouncements = () => {
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
-    const fetchAnnouncements = async () => {
+    const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/announcements/donor/${sessionStorage.getItem('userId')}`);
         const data = await response.json();
@@ -208,8 +208,8 @@ const MyAnnouncements = () => {
         console.error('Error fetching announcements:', error);
       }
     };
-
-    fetchAnnouncements();
+    
+    fetchData();
   }, []);
 
   return (

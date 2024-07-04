@@ -1,5 +1,8 @@
+
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import Announcement from './AnnouncementList/Announcement';
 import { CssBaseline } from '@mui/material';
-import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
 import AboutUs from './components/AboutUs';
@@ -11,7 +14,7 @@ import Card from "./AnnouncementView/Card.js";
 import Login from "./Account/Login/Login.js";
 
 function App() {
-  return (    
+  return (
     <>
       <CssBaseline />
       <Header />
@@ -19,6 +22,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/my-announcements" element={<MyAnnouncements />} />
+        <Route path="/announcements" element={<Announcement />} />
         <Route path="/announcementDetails" element={<Card />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/announcementLogin" element={<Login />} />

@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url('/build/background2.jpg') no-repeat center center/cover;
+    background: url('/public/background2.jpg') no-repeat center center/cover;
     text-align: center;
     color: white;
     padding: 20px;
