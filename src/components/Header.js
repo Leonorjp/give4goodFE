@@ -1,55 +1,9 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Button, Menu, MenuItem } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-const StyledAppBar = styled(AppBar)`
-  background-color: #ff0000 !important;
-  padding: 10px 0;
-`;
-
-const BrandTypography = styled(motion.div)`
-  font-family: 'Cambria', Cochin, Georgia, 'Times New Roman', serif;
-  font-weight: 700;
-  color: white;
-  font-size: 2.5rem;
-  cursor: pointer;
-  text-decoration: none;
-`;
-
-const HeaderLink = styled(Button)`
-  text-transform: none !important;
-  color: white !important;
-  font-weight: ${props => props.active ? 'bold' : 'normal'} !important;
-  font-size: 1.1rem !important;
-  margin: 0 10px !important;
-  transition: transform 0.3s ease !important;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-const StyledMenu = styled(Menu)`
-  .MuiPaper-root {
-    background-color: rgba(255, 0, 0, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-`;
-
-const StyledMenuItem = styled(MenuItem)`
-  color: white !important;
-  font-weight: bold !important;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    transform: scale(1.05);
-  }
-`;
+import '../css/Header.css';
 
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -73,10 +27,10 @@ const Header = () => {
   };
 
   return (
-    <StyledAppBar position="static">
+    <AppBar position="static" className="styled-app-bar">
       <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <BrandTypography
-          component={motion.div}
+        <motion.div
+          className="brand-typography"
           onClick={handleLogoClick}
           whileHover={{ scale: 1.05 }}
           transition={{
@@ -86,55 +40,56 @@ const Header = () => {
           }}
         >
           Give4Good
-        </BrandTypography>
+        </motion.div>
         <div>
-          <HeaderLink
+          <Button
             component={Link}
             to="/"
-            active={location.pathname === '/'}
+            className={`header-link ${location.pathname === '/' ? 'header-link-active' : ''}`}
           >
             {capitalizeFirstLetter('home')}
-          </HeaderLink>
-          <HeaderLink
+          </Button>
+          <Button
             component={Link}
             to="/about-us"
-            active={location.pathname === '/about-us'}
+            className={`header-link ${location.pathname === '/about-us' ? 'header-link-active' : ''}`}
           >
             {capitalizeFirstLetter('about us')}
-          </HeaderLink>
-          <HeaderLink
+          </Button>
+          <Button
             aria-controls="announcements-menu"
             aria-haspopup="true"
             onClick={handleClick}
             endIcon={<ArrowDropDownIcon />}
-            active={location.pathname === '/announcements' || location.pathname === '/my-announcements'}
+            className={`header-link ${(location.pathname === '/announcements' || location.pathname === '/my-announcements') ? 'header-link-active' : ''}`}
           >
             {capitalizeFirstLetter('announcements')}
-          </HeaderLink>
-          <StyledMenu
+          </Button>
+          <Menu
             id="announcements-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
+            className="styled-menu"
           >
-            <StyledMenuItem component={Link} to="/announcements" onClick={handleClose}>
+            <MenuItem component={Link} to="/announcements" onClick={handleClose} className="styled-menu-item">
               {capitalizeFirstLetter('all announcements')}
-            </StyledMenuItem>
-            <StyledMenuItem component={Link} to="/my-announcements" onClick={handleClose}>
+            </MenuItem>
+            <MenuItem component={Link} to="/my-announcements" onClick={handleClose} className="styled-menu-item">
               {capitalizeFirstLetter('my announcements')}
-            </StyledMenuItem>
-          </StyledMenu>
-          <HeaderLink
+            </MenuItem>
+          </Menu>
+          <Button
             component={Link}
             to="/sign-up"
-            active={location.pathname === '/sign-up'}
+            className={`header-link ${location.pathname === '/sign-up' ? 'header-link-active' : ''}`}
           >
             {capitalizeFirstLetter('account')}
-          </HeaderLink>
+          </Button>
         </div>
       </Toolbar>
-    </StyledAppBar>
+    </AppBar>
   );
 };
 

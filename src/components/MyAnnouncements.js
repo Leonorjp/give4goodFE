@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import dogImage from './image/dog.png';
+import '../css/MyAnnouncements.css';
 
 const gradientAnimation = keyframes`
   0% { background-position: 0% 50%; }
@@ -51,7 +51,7 @@ const Card = styled(motion.div)`
   align-items: center;
   padding: 1.5rem;
   transition: all 0.3s ease;
-  border: 2px solid #e0e0e0; // Added stronger border
+  border: 2px solid #e0e0e0;
 `;
 
 const NewAnnouncementCard = styled(Card)`
@@ -61,7 +61,7 @@ const NewAnnouncementCard = styled(Card)`
   position: relative;
   overflow: hidden;
   animation: ${floatAnimation} 3s ease-in-out infinite;
-  border: 2px solid #d0d0d0; // Added stronger border
+  border: 2px solid #d0d0d0;
 
   &::before {
     content: '';
@@ -101,7 +101,7 @@ const CardImage = styled(motion.img)`
   border-radius: 10px;
   margin-bottom: 1rem;
   transition: all 0.3s ease;
-  border: 2px solid #f0f0f0; // Added border to image
+  border: 2px solid #f0f0f0;
 `;
 
 const CardTitle = styled(motion.h2)`
@@ -161,19 +161,19 @@ const EditButton = styled(motion.button)`
   }
 `;
 
-const AnnouncementCard = ({ title, category }) => (
+const AnnouncementCard = ({ title, category, imageUrl }) => (
   <Card
     whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(0, 0, 0, 0.2)' }}
     transition={{ type: "spring", stiffness: 300 }}
   >
     <CardImage 
-      src={dogImage} 
+      src={imageUrl} 
       alt={title}
-      whileHover={{ scale: 1.1 }} // Removed rotate effect
+      whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 300 }}
     />
     <CardTitle
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 20 }} 
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
@@ -196,11 +196,22 @@ const AnnouncementCard = ({ title, category }) => (
 );
 
 const MyAnnouncements = () => {
-  const announcements = [
-   //  { id: 1, title: 'Cão peludo', category: 'Animal' },
-   //  { id: 2, title: 'Cão brincalhão', category: 'Animal' },
-     
-  ];
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    const fetchAnnouncements = async () => {
+      try {
+        const donorId = '66869b0d10fbf7217951b147'; 
+        const response = await fetch(`http://localhost:8080/announcements/donor/${donorId}`);
+        const data = await response.json();
+        setAnnouncements(data);
+      } catch (error) {
+        console.error('Error fetching announcements:', error);
+      }
+    };
+
+    fetchAnnouncements();
+  }, []);
 
   return (
     <PageContainer
@@ -243,7 +254,11 @@ const MyAnnouncements = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
             >
-              <AnnouncementCard {...announcement} />
+              <AnnouncementCard 
+                title={announcement.product.name} 
+                category={announcement.product.category} 
+                imageUrl={announcement.product.photoUrl} // Use the photo URL from the API
+              />
             </motion.div>
           ))}
         </AnimatePresence>

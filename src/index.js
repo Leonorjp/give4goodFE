@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import { BrowserRouter } from 'react-router-dom';
-import './index.css'; 
+
 
 ReactDOM.render(
   <React.StrictMode>

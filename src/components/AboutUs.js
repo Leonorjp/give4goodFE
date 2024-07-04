@@ -1,73 +1,34 @@
 import React, { useEffect, useRef } from 'react';
 import { Container, Typography, Paper, Grid, Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { Favorite, People, EmojiObjects, Recycling, Public, Visibility } from '@mui/icons-material';
-
-const AboutContainer = styled(Container)(({ theme }) => ({
-  minHeight: '100vh',
-  padding: theme.spacing(8, 0),
-  background: 'linear-gradient(135deg, #FF0000 0%, #FF6B6B 100%)',
-  overflow: 'hidden',
-}));
-
-const WhiteBox = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(6),
-  background: 'rgba(255, 255, 255, 0.9)',
-  borderRadius: theme.spacing(3),
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-  margin: 'auto',
-  maxWidth: '90%',
-}));
-
-const AnimatedBox = motion(Box);
-
-const FeatureBox = styled(motion.div)(({ theme }) => ({
-  background: 'rgba(255, 255, 255, 0.8)',
-  color: '#FF0000',
-  padding: theme.spacing(3),
-  borderRadius: theme.spacing(2),
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    background: 'rgba(255, 255, 255, 1)',
-    transform: 'translateY(-5px)',
-    boxShadow: '0 5px 15px rgba(255, 0, 0, 0.2)',
-  },
-}));
-
-const MotivationalBox = styled(motion.div)(({ theme }) => ({
-  background: 'linear-gradient(45deg, #FF0000, #FF6B6B)',
-  color: 'white',
-  padding: theme.spacing(4),
-  borderRadius: theme.spacing(2),
-  textAlign: 'center',
-  marginTop: theme.spacing(6),
-  position: 'relative',
-  overflow: 'hidden',
-}));
-
-const FloatingIcon = styled(motion.div)(({ theme }) => ({
-  position: 'absolute',
-  fontSize: '2rem',
-  color: 'rgba(255, 255, 255, 0.2)',
-}));
+import '../css/AboutUs.css';
 
 const AboutUs = () => {
   const controls = useAnimation();
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
 
   useEffect(() => {
-    if (inView) {
-      controls.start('visible');
+    const node = ref.current; // Captura a referência atual
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          controls.start('visible');
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (node) {
+      observer.observe(node);
     }
-  }, [controls, inView]);
+
+    return () => {
+      if (node) {
+        observer.unobserve(node);
+      }
+    };
+  }, [controls]);
 
   const features = [
     { icon: <Favorite fontSize="large" />, label: "Personalized Donations", description: "AI algorithm connecting donors to aligned causes." },
@@ -81,10 +42,11 @@ const AboutUs = () => {
   const floatingIcons = ['❤️', '🌍', '🤝', '💡', '🎁', '🌱'];
 
   return (
-    <AboutContainer maxWidth={false}>
-      <WhiteBox elevation={3}>
-        <AnimatedBox 
+    <Container maxWidth={false} className="about-container">
+      <Paper elevation={3} className="white-box">
+        <Box
           ref={ref}
+          component={motion.div}
           initial="hidden"
           animate={controls}
           variants={{
@@ -116,8 +78,9 @@ const AboutUs = () => {
           <Grid container spacing={4}>
             {features.map((feature, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <AnimatedBox 
-                  whileHover={{ scale: 1.05, rotate: [0, 5, -5, 0] }} 
+                <Box
+                  component={motion.div}
+                  whileHover={{ scale: 1.05, rotate: [0, 5, -5, 0] }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={controls}
@@ -126,23 +89,24 @@ const AboutUs = () => {
                     hidden: { opacity: 0, y: 20 }
                   }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="feature-box"
                 >
-                  <FeatureBox>
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    >
-                      {feature.icon}
-                    </motion.div>
-                    <Typography variant="h6" sx={{ my: 2, color: '#FF0000' }}>{feature.label}</Typography>
-                    <Typography variant="body2" sx={{ color: '#333333' }}>{feature.description}</Typography>
-                  </FeatureBox>
-                </AnimatedBox>
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  >
+                    {feature.icon}
+                  </motion.div>
+                  <Typography variant="h6" sx={{ my: 2, color: '#FF0000' }}>{feature.label}</Typography>
+                  <Typography variant="body2" sx={{ color: '#333333' }}>{feature.description}</Typography>
+                </Box>
               </Grid>
             ))}
           </Grid>
 
-          <MotivationalBox
+          <Box
+            component={motion.div}
+            className="motivational-box"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={controls}
             variants={{
@@ -152,7 +116,8 @@ const AboutUs = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             {floatingIcons.map((icon, index) => (
-              <FloatingIcon
+              <motion.div
+                className="floating-icon"
                 key={index}
                 initial={{ x: `${Math.random() * 100}%`, y: '100%' }}
                 animate={{
@@ -170,10 +135,10 @@ const AboutUs = () => {
                 }}
               >
                 {icon}
-              </FloatingIcon>
+              </motion.div>
             ))}
             <motion.div
-              animate={{ 
+              animate={{
                 y: [0, -10, 0],
                 scale: [1, 1.05, 1],
               }}
@@ -192,10 +157,10 @@ const AboutUs = () => {
                 Join us in making a difference, one act of kindness at a time.
               </Typography>
             </motion.div>
-          </MotivationalBox>
-        </AnimatedBox>
-      </WhiteBox>
-    </AboutContainer>
+          </Box>
+        </Box>
+      </Paper>
+    </Container>
   );
 };
 
