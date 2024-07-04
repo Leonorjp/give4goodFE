@@ -7,8 +7,8 @@
 }
 
 .announcement-card {
-  flex: 1 1 calc(33.333% - 40px); /* Ajusta a largura dos cards */
-  max-width: calc(33.333% - 40px); /* Ajusta a largura máxima dos cards */
+  flex: 1 1 calc(33.333% - 20px); /* Ajusta a largura dos cards */
+  max-width: calc(30.333% - 40px); /* Ajusta a largura máxima dos cards */
   box-sizing: border-box;
   background: white;
   border: 3px solid #ddd;
@@ -20,8 +20,8 @@
 }
 
 .announcement-card img {
-  width: 90%; /* Ajuste do tamanho da imagem */
-  height: auto;
+  width: 80%; /* Ajuste do tamanho da imagem */
+  height: 60%;
   margin-top: 16px;
   border-radius: 10%;
 }
