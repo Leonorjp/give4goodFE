@@ -9,7 +9,7 @@ const CreateAd = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [imageUrl, setImageUrl] = useState('');
   const navigate = useNavigate();
-  const categories = ["Desport","Animais","Cameras","Imóveis"]
+
 
   const onSubmit = async (data) => {
     try {

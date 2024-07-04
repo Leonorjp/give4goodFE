@@ -5,7 +5,7 @@ import Announcement from './AnnouncementList/Announcement';
 import CreateAd from './AnnouncementCreat/Edit/CreateAd';
 import EditAd from './AnnouncementCreat/Edit/EditAd';
 
-const URL = 'http://localhost:8080/announcements';
+const URL = 'http://localhost:8080/announcements/not-owned-by/666880ca4b50b9431017136a';
 
 function App() {
   const [bodyClass, setBodyClass] = useState('');

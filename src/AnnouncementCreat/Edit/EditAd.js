@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './EditAd.css';
 
 const EditAd = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPhotoUrl, setProductPhotoUrl] = useState("");
@@ -115,12 +117,17 @@ const EditAd = () => {
               value={productDescription}
               onChange={(e) => setProductDescription(e.target.value)}
             />
-            <input
+            <select
+              {...register('productCategory', { required: 'Product category is required' })}
               className="text-input-category"
-              placeholder="Category"
-              value={productCategory}
-              onChange={(e) => setProductCategory(e.target.value)}
-            />
+            >
+              <option value="">Select Category</option>
+              <option value="Leisure">Leisure</option>
+              <option value="Real Estate">Real Estate</option>
+              <option value="Sports">Sports</option>
+              <option value="Technology">Technology</option>
+              <option value="Tools">Tools</option>
+            </select>
           </div>
           <div className="Edit-button-container">
             <button className="Edit-button" onClick={handleUpdate}>Update</button>
