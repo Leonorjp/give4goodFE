@@ -3,15 +3,20 @@ import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import './CreateAd.css';
+import '../Edit/CreateAd.css';
 
 const CreateAd = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [imageUrl, setImageUrl] = useState('');
   const navigate = useNavigate();
 
+  const onSubmit = async (formData) => {
+    // Adicione o userDonorId ao formData
+    const data = {
+      ...formData,
+      userDonorId: sessionStorage.getItem('userId')
+    };
 
-  const onSubmit = async (data) => {
     try {
       const response = await fetch('http://localhost:8080/announcements/', {
         method: 'POST',
@@ -72,11 +77,6 @@ const CreateAd = () => {
               placeholder="Description"
             />
 
-            <input
-              {...register('userDonorId', { required: 'Donor ID is required' })}
-              className="text-input-description-input"
-              placeholder="Donor"
-            />
 
             <select
               {...register('productCategory', { required: 'Product category is required' })}

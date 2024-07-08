@@ -2,27 +2,25 @@ import React, { useState, useEffect } from "react";
 import CustomButton from "./ButtonClaim";
 import BackButton from "./ButtonBack";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // Import useParams
 import "./Card.css";
 
 function Card({ onClose }) {
+  const { id } = useParams(); // Pega o ID do anúncio a partir da URL
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const [announcementDetailsName, setAnnouncementName] = useState(null);
   const [announcementDetailsCategory, setAnnouncementCategory] = useState(null);
-  const [announcementDetailsDescription, setAnnouncementDescription] =
-    useState(null);
-  const [announcementDetailsImage, setannouncementDetailsImage] =
-    useState(null);
+  const [announcementDetailsDescription, setAnnouncementDescription] = useState(null);
+  const [announcementDetailsImage, setAnnouncementDetailsImage] = useState(null);
   const [error, setError] = useState(null);
-  const announcementId = "668533b561655250f4b4502b";
-  const userDoneeId = "6669a437863d7b2b3954d255";
+  const userDoneeId = sessionStorage.getItem("userId"); // Pega o ID do usuário da sessionStorage
 
   const handleClaim = async (event) => {
     event.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8080/announcements/${announcementId}/userDonee/${userDoneeId}`,
+        `http://localhost:8080/announcements/${id}/userDonee/${userDoneeId}`,
         {
           method: "PUT",
           headers: {
@@ -32,7 +30,8 @@ function Card({ onClose }) {
       );
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.message}`);
       }
       Swal.fire({
         title: "Success!",
@@ -46,7 +45,7 @@ function Card({ onClose }) {
         allowEscapeKey: false,    
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/account");
+          navigate("/announcements");
         }
       });
     } catch (error) {
@@ -67,37 +66,36 @@ function Card({ onClose }) {
   };
 
   useEffect(() => {
-    const updateBodyClass = () => {
-      const pathName = window.location.pathname;
-
-      if (pathName === "/announcementDetails") {
-        const announcementId = "668533b561655250f4b4502b";
-        fetch(`http://localhost:8080/announcements/${announcementId}`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then((data) => {
-            setAnnouncementName(data.product.name);
-            setAnnouncementCategory(data.product.category);
-            setAnnouncementDescription(data.product.description);
-            setannouncementDetailsImage(data.product.photoUrl);
-          })
-          .catch((error) => {
-            setError(error.message);
-          });
+    const fetchAnnouncementDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/announcements/${id}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setAnnouncementName(data.product.name);
+        setAnnouncementCategory(data.product.category);
+        setAnnouncementDescription(data.product.description);
+        setAnnouncementDetailsImage(data.product.photoUrl);
+      } catch (error) {
+        console.error("Error fetching announcement details:", error);
+        setError(error.message);
+        Swal.fire({
+          title: "Error!",
+          text: "There was a problem while fetching the announcement details.",
+          icon: "error",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "confirm-button",
+          },
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        });
       }
     };
 
-    updateBodyClass();
-    window.addEventListener("popstate", updateBodyClass);
-
-    return () => {
-      window.removeEventListener("popstate", updateBodyClass);
-    };
-  }, []);
+    fetchAnnouncementDetails();
+  }, [id]);
 
   return (
     <div className="card-container">
@@ -105,7 +103,11 @@ function Card({ onClose }) {
         <div className="card-content">
           <div className="card-header">
             <div className="card-image">
-              <img src={announcementDetailsImage} alt="Announcement" />
+              {announcementDetailsImage ? (
+                <img src={announcementDetailsImage} alt="Announcement" />
+              ) : (
+                <div className="image-placeholder">No Image Available</div>
+              )}
             </div>
           </div>
           <div className="card-text">
@@ -121,10 +123,9 @@ function Card({ onClose }) {
           </div>
         </div>
         <div className="card-navigation-Buttons">
-          <div className="backArrow">
+          <div className="left-arrow-details">
             <BackButton text="back" />
           </div>
-
           <div className="card-navigation">
             <CustomButton handleExploreClick={handleClaim} />
           </div>

@@ -13,7 +13,7 @@ function Login() {
 
   const handleSignUpClick = (e) => {
     e.preventDefault();
-    navigate("/account");
+    navigate("/sign-up");
   };
 
   const handleLogin = async (event) => {
@@ -86,7 +86,7 @@ function Login() {
         <div className="signUp-text">
           <p>
             Don't have an account?{" "}
-            <a href="/signup" onClick={handleSignUpClick}>
+            <a href="/sign-up" onClick={handleSignUpClick}>
               Sign up here!
             </a>
           </p>

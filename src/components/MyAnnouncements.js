@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import '../css/MyAnnouncements.css';
 
 const gradientAnimation = keyframes`
@@ -161,42 +162,52 @@ const EditButton = styled(motion.button)`
   }
 `;
 
-const AnnouncementCard = ({ title, category, imageUrl }) => (
-  <Card
-    whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(0, 0, 0, 0.2)' }}
-    transition={{ type: "spring", stiffness: 300 }}
-  >
-    <CardImage 
-      src={imageUrl} 
-      alt={title}
-      whileHover={{ scale: 1.1 }}
+const AnnouncementCard = ({ id, title, category, imageUrl }) => {
+  const navigate = useNavigate(); // Hook para navegação
+
+  const handleEditClick = () => {
+    navigate(`/edit-announcement/${id}`);
+  };
+
+  return (
+    <Card
+      whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(0, 0, 0, 0.2)' }}
       transition={{ type: "spring", stiffness: 300 }}
-    />
-    <CardTitle
-      initial={{ opacity: 0, y: 20 }} 
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2 }}
     >
-      {title}
-    </CardTitle>
-    <CardCategory
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3 }}
-    >
-      {category}
-    </CardCategory>
-    <EditButton
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-    >
-      Edit
-    </EditButton>
-  </Card>
-);
+      <CardImage 
+        src={imageUrl} 
+        alt={title}
+        whileHover={{ scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      />
+      <CardTitle
+        initial={{ opacity: 0, y: 20 }} 
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        {title}
+      </CardTitle>
+      <CardCategory
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        {category}
+      </CardCategory>
+      <EditButton
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={handleEditClick}
+      >
+        Edit
+      </EditButton>
+    </Card>
+  );
+};
 
 const MyAnnouncements = () => {
   const [announcements, setAnnouncements] = useState([]);
+  const navigate = useNavigate(); // Hook para navegação
 
   useEffect(() => {
     const fetchData = async () => {
@@ -231,6 +242,7 @@ const MyAnnouncements = () => {
           <NewAnnouncementCard
             whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(0, 0, 0, 0.2)' }}
             transition={{ type: "spring", stiffness: 300 }}
+            onClick={() => navigate('/CreateAd')} // Navega para o formulário CreateAd
           >
             <PlusIcon
               whileHover={{ rotate: 180 }}
@@ -254,6 +266,7 @@ const MyAnnouncements = () => {
               transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
             >
               <AnnouncementCard 
+                id={announcement.id} // Passe o ID do anúncio
                 title={announcement.product.name} 
                 category={announcement.product.category} 
                 imageUrl={announcement.product.photoUrl} // Use the photo URL from the API

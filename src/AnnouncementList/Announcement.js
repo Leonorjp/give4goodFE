@@ -9,7 +9,7 @@ function Announcements() {
   const [fetched, setFetched] = useState(false);
   const announcementsPerPage = 9;
 
-  const URL = `http://localhost:8080/announcements/not-owned-by/${sessionStorage.getItem("userId")}`;
+  const URL = `http://localhost:8080/announcements/unclaimed/not-owned-by/${sessionStorage.getItem("userId")}`;
 
   useEffect(() => {
     const fetchData = async () => {

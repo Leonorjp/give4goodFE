@@ -6,7 +6,7 @@ const BackButton = () => {
 
   return (
     <span
-    className="left-arrow" onClick={() => navigate('/account')}>
+    className="left-arrow-details" onClick={() => navigate('/announcements')}>
       &lt; back
       </span>
   );

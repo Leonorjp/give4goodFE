@@ -16,7 +16,7 @@
 
 .url-container{
 position: absolute;
-bottom: 110px;
+bottom: 75px;
 left: 10px;
 display: flex; 
 justify-content: flex-end;
@@ -122,6 +122,7 @@ header {
   align-self: center; 
 }
 
+ffffffffff
 .text-input,
 .text-input-category {
   padding: 12px;
@@ -142,7 +143,7 @@ header {
 
 .create-button-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 14px;
   right: 20px;
   display: flex;
   justify-content: flex-end;

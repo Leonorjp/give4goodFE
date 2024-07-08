@@ -31,12 +31,12 @@ const AboutUs = () => {
   }, [controls]);
 
   const features = [
-    { icon: <Favorite fontSize="large" />, label: "Personalized Donations", description: "AI algorithm connecting donors to aligned causes." },
-    { icon: <People fontSize="large" />, label: "Engaged Community", description: "Virtual events and forums for donors and beneficiaries." },
+    { icon: <Favorite fontSize="large" />, label: "Variaty of donations", description: "Due to having multiple donors, a variety of products will be available." },
+    { icon: <People fontSize="large" />, label: "Engaged Community", description: "We promote interaction between donors and beneficiaries." },
     { icon: <EmojiObjects fontSize="large" />, label: "Social Innovation", description: "Blockchain for transparent donation tracking." },
-    { icon: <Recycling fontSize="large" />, label: "Sustainability", description: "Recycling and upcycling program for donated items." },
-    { icon: <Public fontSize="large" />, label: "Global Impact", description: "Partnerships with international NGOs to expand reach." },
-    { icon: <Visibility fontSize="large" />, label: "Total Transparency", description: "Real-time reports and independent audits." },
+    { icon: <Recycling fontSize="large" />, label: "Sustainability", description: "Recycling and upcycling, don't throw away the things you dont use anymore." },
+    { icon: <Public fontSize="large" />, label: "Global Impact", description: "Our platform will contribute to global impact by reducing waste, thereby benefiting the world." },
+    { icon: <Visibility fontSize="large" />, label: "Total Transparency", description: "Every aspect of the project is open and accessible, promoting trust among stakeholders." },
   ];
 
   const floatingIcons = ['❤️', '🌍', '🤝', '💡', '🎁', '🌱'];
@@ -71,7 +71,7 @@ const AboutUs = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <Typography variant="body1" paragraph sx={{ fontSize: '1.2rem', lineHeight: 1.8, color: '#333333', textAlign: 'center', maxWidth: '800px', margin: '0 auto 40px' }}>
-              Give4Good is not just a donation platform; it's a movement for social transformation. We use cutting-edge technology to create an efficient and transparent solidarity ecosystem, where every action generates measurable and lasting impact.
+              Give4Good is not just a donation platform. It's a movement for social transformation. We use cutting-edge technology to create an efficient and transparent solidarity ecosystem, where every action generates measurable and lasting impact.
             </Typography>
           </motion.div>
 

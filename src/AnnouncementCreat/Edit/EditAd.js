@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './EditAd.css';
 
 const EditAd = () => {
+  const { id } = useParams(); // Pega o ID do anúncio a partir da URL
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -16,11 +17,11 @@ const EditAd = () => {
 
   useEffect(() => {
     fetchAnnouncementDetails();
-  }, []);
+  }, [id]);
 
   const fetchAnnouncementDetails = async () => {
     try {
-      const response = await fetch('http://localhost:8080/announcements/66867a75c7924927253d2322');
+      const response = await fetch(`http://localhost:8080/announcements/${id}`);
       const data = await response.json();
       setProductName(data.product.name);
       setProductDescription(data.product.description);
@@ -50,7 +51,7 @@ const EditAd = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/announcements/66867a75c7924927253d2322', {
+      const response = await fetch(`http://localhost:8080/announcements/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +61,7 @@ const EditAd = () => {
 
       if (response.ok) {
         toast.success('Announcement updated successfully!');
-        navigate('/'); // Redirect to home page
+        navigate('/my-announcements'); // Redirect to home page
       } else {
         const errorData = await response.json();
         toast.error(`Error updating announcement: ${errorData.message}`);
@@ -73,13 +74,13 @@ const EditAd = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch('http://localhost:8080/announcements/66867a75c7924927253d2322', {
+      const response = await fetch(`http://localhost:8080/announcements/${id}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
         toast.success('Announcement deleted successfully!');
-        navigate('/'); // Redirect to home page
+        navigate('/my-announcements'); 
       } else {
         const errorData = await response.json();
         toast.error(`Error deleting announcement: ${errorData.message}`);
@@ -120,6 +121,8 @@ const EditAd = () => {
             <select
               {...register('productCategory', { required: 'Product category is required' })}
               className="text-input-category"
+              value={productCategory}
+              onChange={(e) => setProductCategory(e.target.value)}
             >
               <option value="">Select Category</option>
               <option value="Leisure">Leisure</option>
