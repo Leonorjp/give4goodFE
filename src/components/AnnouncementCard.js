@@ -1,5 +1,5 @@
 import React from 'react';
-import './AnnouncementCard.css';
+
 
 function AnnouncementCard({ title, category }) {
   return (
