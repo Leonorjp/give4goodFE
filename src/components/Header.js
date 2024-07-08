@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Button, Menu, MenuItem } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Swal from 'sweetalert2';
 import '../css/Header.css';
 
 const capitalizeFirstLetter = (string) => {
@@ -30,6 +31,27 @@ const Header = () => {
 
   const handleLogoClick = () => {
     navigate('/');
+  };
+
+  const handleSignOut = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to sign out?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, sign out!',
+      cancelButtonText: 'Cancel',
+      customClass: {
+        confirmButton: 'confirm-button',
+        cancelButton: 'cancel-button'
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        sessionStorage.clear();
+        navigate('/announcementLogin');
+      }
+    });
+    handleClose();
   };
 
   return (
@@ -108,6 +130,9 @@ const Header = () => {
             </MenuItem>
             <MenuItem component={Link} to="/sign-up" onClick={handleClose} className="styled-menu-item">
               {capitalizeFirstLetter('sign up')}
+            </MenuItem>
+            <MenuItem onClick={handleSignOut} className="styled-menu-item">
+              {capitalizeFirstLetter('sign out')}
             </MenuItem>
           </Menu>
         </div>
