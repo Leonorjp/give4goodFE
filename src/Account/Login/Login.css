@@ -22,7 +22,7 @@
 .login-form h1 {
   color: #c01722;
   font-size: 50px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .login-form form {
@@ -33,13 +33,13 @@
 }
 
 .login-form .input-group {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   width: 80%;
 }
 
 .login-form .input-group label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: #7e7e7e;
 }
 
@@ -51,8 +51,12 @@
   box-sizing: border-box;
 }
 
+.input-group-password label{
+  margin-bottom: 5px;
+}
+
 .signUp-text {
-  margin-top: 60px;
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("");
+  const [UserPassword, setUserPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [error, setError] = useState("");
 
@@ -18,34 +19,20 @@ function Login() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    let responseJson; // Declare responseJson outside the try block to widen its scope
     try {
       const response = await fetch(
-        `http://localhost:8080/users/email/${userEmail}`
+        `http://localhost:8080/users/email/${userEmail}/password/${UserPassword}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const responseJson = await response.json();
+      responseJson = await response.json(); // Assign the value to responseJson here
       sessionStorage.setItem("userEmail", responseJson.contact.email);
       sessionStorage.setItem("userName", responseJson.name);
       sessionStorage.setItem("userId", responseJson.id);
-
-      Swal.fire({
-        title: "Logged in successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-        customClass: {
-          confirmButton: "confirm-button",
-        },
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/");
-        }
-        return responseJson
-      });
-
+      sessionStorage.setItem("userPassword", responseJson.password);
+  
     } catch (error) {
       console.error("There was an error!", error);
       setError(error.message);
@@ -60,8 +47,39 @@ function Login() {
         allowOutsideClick: false,
         allowEscapeKey: false,
       });
+      return; // Return early to prevent further execution in case of an error
     }
-    
+  
+    // Now responseJson is accessible here
+    if (responseJson && responseJson.password === UserPassword) {
+      Swal.fire({
+        title: "Logged in successfully!",
+        icon: "success",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "confirm-button",
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      });
+    } else {
+      // Handle incorrect password or responseJson not being set
+      Swal.fire({
+        title: "Login failed",
+        text: "Incorrect email or password.",
+        icon: "error",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "confirm-button",
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
+    }
   };
 
   return (
@@ -70,15 +88,28 @@ function Login() {
         <h1>Login</h1>
         <form onSubmit={handleLogin}>
           <div className="input-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-              required
-            />
+            <div className="input-group-email">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-group-password">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={UserPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
           <ButtonLogin text="Login" />
         </form>
